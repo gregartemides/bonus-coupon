@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export default phone =>
   axios.post(
-    process.env.REACT_APP_API_URL,
+    process.env.REACT_APP_API_URL || 'http://localhost:3001/api/sms-promotion',
     `phone=${encodeURIComponent(phone)}`,
     { headers: { 'content-type': 'application/x-www-form-urlencoded' } },
   )
