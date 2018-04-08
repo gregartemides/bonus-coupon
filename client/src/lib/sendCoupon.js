@@ -6,13 +6,11 @@ export default phone =>
     `phone=${encodeURIComponent(phone)}`,
     { headers: { 'content-type': 'application/x-www-form-urlencoded' } },
   )
-    // parse response
-    .then(res => res.json())
     // success contacting server
     .then(json =>
       ({
         responseReceived: true,
-        responseMessage: json.message,
+        responseMessage: json.data.message,
       }))
     // error connecting to server or bad json response
     .catch(() =>
