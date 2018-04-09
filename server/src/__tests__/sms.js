@@ -18,19 +18,14 @@ test('createMessage() returns proper message at 12pm', () => {
   expect(sms.createMessage(new Date('01/01/2018 12:00:00'))).toBe('Hello! Your promocode is PM456');
 });
 
+jest.mock('twilio');
 
-test('sendSms() resolves', () => {
-  jest.mock('twilio', () => jest.fn());
-  const create = jest.fn();
-  const expectedResolution = 'Success! In a few moments you will receive the promocode SMS.';
-  create.mockReturnValue(Promise.resolve(expectedResolution));
-  twilio.mockImplementation(jest.fn(() => ({ messages: { create } })));
+test('sendSms() resolves with error message', () =>
+  sms.sendSms('+12345678')
+    .then(res => expect(res).toEqual({ message: "Success! In a few moments you will receive the promocode SMS." }))
+);
 
-  sms.sendSms('+11111111');
-
-  /*expect(twilio).toHaveBeenCalledWith(
-    process.env.ACCOUNT_SID,
-    process.env.AUTH_TOKEN
-  );*/
-  expect(create).resolves.toBe(expectedResolution);
-});
+test('sendSms() resolves with error message', () =>
+  sms.sendSms('')
+    .then(res => expect(res).toEqual({ "message": "Error! The 'To' number + is not a valid phone number." }))
+);
