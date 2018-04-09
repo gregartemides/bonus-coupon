@@ -1,5 +1,7 @@
 # Bonus Coupon - A React-Express-Twilio project
 
+![bonus coupon](bonus-coupon.jpg "Bonus coupon")
+
 ## Install
 ```
 git clone https://github.com/gregartemides/bonus-coupon.git
@@ -18,6 +20,7 @@ yarn start
 ```
 
 ## Tests
+![tests](tests.jpg "Tests")
 There are tests in both client and server. Just cd into either directory and
 ```
 yarn test
