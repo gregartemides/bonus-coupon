@@ -12,20 +12,24 @@ export const createMessage = date =>
     ? 'Good morning! Your promocode is AM123'
     : 'Hello! Your promocode is PM456');
 
-export const sendSms = (req, res) => {
-  const client = twilio(process.env.ACCOUNT_SID, process.env.AUTH_TOKEN);
-  client.messages
-    .create({
-      to: req.body.phone,
-      from: process.env.FROM_NUMBER,
-      body: createMessage(new Date()),
-    })
+export const sendSms = to =>
+  twilio(
+    process.env.ACCOUNT_SID,
+    process.env.AUTH_TOKEN,
+  ).messages.create({
+    to,
+    from: process.env.FROM_NUMBER,
+    body: createMessage(new Date()),
+  })
     .then(() =>
-      res.json({
+      ({
         message: 'Success! In a few moments you will receive the promocode SMS.',
       }))
     .catch(error =>
-      res.json({
+      ({
         message: `Error! ${error.message}`,
       }));
-};
+
+export const controller = (req, res) =>
+  sendSms(req.body.phone)
+    .then(json => res.json(json));

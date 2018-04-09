@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import { sendSms } from './sms';
+import { controller } from './sms';
 
 const app = express();
 
@@ -14,7 +14,7 @@ app.use((req, res, next) => {
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // here's the api route!
-app.post('/api/sms-promotion', sendSms);
+app.post('/api/sms-promotion', controller);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
