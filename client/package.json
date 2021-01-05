@@ -7,7 +7,7 @@
   "author": "Greg Artemides",
   "main": "src/index.js",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "enzyme": "^3.3.0",
     "eslint": "^4.19.1",
     "prop-types": "^15.6.1",
